@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Contacts</title>
+    <style>
+        body { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Saved Contacts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+            </tr>
+        </thead>
+        <tbody id="contactsList"></tbody>
+    </table>
+
+    <script>
+        fetch('/api/contacts')
+            .then(response => response.json())
+            .then(data => {
+                const html = data.map(contact => `
+                    <tr>
+                        <td>${contact.first_name} ${contact.last_name}</td>
+                        <td>${contact.title || ''}</td>
+                        <td>${contact.company || ''}</td>
+                        <td>${contact.email || ''}</td>
+                        <td>${contact.phone || ''}</td>
+                        <td>${contact.website || ''}</td>
+                    </tr>
+                `).join('');
+                document.getElementById('contactsList').innerHTML = html;
+            })
+            .catch(error => console.error('Error:', error));
+
+            fetch('/api/contacts')
+            .then(response => response.json())
+            .then(data => {
+                const html = data.map(contact => `
+                    <tr>
+                        <td>${contact.first_name} ${contact.last_name}</td>
+                        <td>${contact.title || ''}</td>
+                        <td>${contact.company || ''}</td>
+                        <td>${contact.email || ''}</td>
+                        <td>${contact.phone || ''}</td>
+                        <td>${contact.website || ''}</td>
+                    </tr>
+                `).join('');
+                document.getElementById('contactsList').innerHTML = html;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
